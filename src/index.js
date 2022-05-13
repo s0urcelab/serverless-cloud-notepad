@@ -1,8 +1,13 @@
+// define your repo or cdn
+const CDN_PREFIX = 'cdn.jsdelivr.net/gh/s0urcelab/serverless-cloud-notepad@master/static'
+
+
 addEventListener('fetch', event => {
     event.respondWith(handleRequest(event.request));
 });
 
 const genHash = n => {
+    // remove char that confuse user
     const charset = '2345679abcdefghjkmnpqrstwxyz'
     return Array(n)
         .join()
@@ -19,9 +24,9 @@ const html = content => `
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pad</title>
-    <link href="//cdn.jsdelivr.net/gh/s0urcelab/serverless-cloud-notepad/static/favicon.ico" rel="shortcut icon" type="image/ico" />
-    <link href="//cdn.jsdelivr.net/gh/s0urcelab/serverless-cloud-notepad/static/css/normalize.css" rel="stylesheet" media="screen" />
-    <link href="//cdn.jsdelivr.net/gh/s0urcelab/serverless-cloud-notepad/static/css/app.css" rel="stylesheet" media="screen" />
+    <link href="//${CDN_PREFIX}/favicon.ico" rel="shortcut icon" type="image/ico" />
+    <link href="//${CDN_PREFIX}/css/normalize.min.css" rel="stylesheet" media="screen" />
+    <link href="//${CDN_PREFIX}/css/app.min.css" rel="stylesheet" media="screen" />
 </head>
 <body>
     <div class="stack">
@@ -35,8 +40,7 @@ const html = content => `
     </div>
     <div id="loading"></div>
 
-    <script src="//cdn.jsdelivr.net/gh/jquery/jquery/dist/jquery.min.js"></script>
-    <script src="//cdn.jsdelivr.net/gh/s0urcelab/serverless-cloud-notepad/static/js/app.js"></script>
+    <script src="//${CDN_PREFIX}/js/app.min.js"></script>
 </body>
 </html>
 `
@@ -102,13 +106,13 @@ async function handleRequest(request) {
 
         const success = {
             errCode: 0,
-            message: "ok",
+            message: 'ok',
             padname: savePath,
         }
 
         const fail = {
             errCode: 1,
-            message: "error occur",
+            message: 'kv database put error!',
         }
 
         return returnJSON(saveFlag ? success : fail)

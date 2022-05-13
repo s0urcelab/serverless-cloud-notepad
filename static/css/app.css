@@ -64,7 +64,7 @@ form {
     left: 30px;
     width: 14px;
     height: 7px;
-    background: url('/static/img/loading.gif') -1px -4px no-repeat transparent;
+    background: url('../img/loading.gif') -1px -4px no-repeat transparent;
     border: 1px solid #9ba0a5;
     opacity: 0.4;
     -moz-opacity: 0.4;
@@ -169,8 +169,7 @@ form {
     line-height: 18px;
 }
 
-#loading,
-#printable_contents {
+#loading {
     display: none;
 }
 
