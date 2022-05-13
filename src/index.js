@@ -1,5 +1,5 @@
-// define your repo or cdn
-const CDN_PREFIX = 'cdn.jsdelivr.net/gh/s0urcelab/serverless-cloud-notepad@master/static'
+// use my repo jsdelivr or you can set cdn yourself
+const CDN_PREFIX = 'cdn.jsdelivr.net/gh/s0urcelab/serverless-cloud-notepad/static'
 
 
 addEventListener('fetch', event => {
