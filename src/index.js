@@ -1,5 +1,5 @@
 // use my repo jsdelivr or you can set cdn yourself
-const CDN_PREFIX = 'cdn.jsdelivr.net/gh/s0urcelab/serverless-cloud-notepad/static'
+const CDN_PREFIX = 'cdn.jsdelivr.net/gh/s0urcelab/serverless-cloud-notepad@v1.0.0/static'
 
 
 addEventListener('fetch', event => {
@@ -16,14 +16,14 @@ const genHash = n => {
         .join('')
 }
 
-const html = content => `
+const html = (path, content) => `
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pad</title>
+    <title>${path} — Cloud Notepad</title>
     <link href="//${CDN_PREFIX}/favicon.ico" rel="shortcut icon" type="image/ico" />
     <link href="//${CDN_PREFIX}/css/normalize.min.css" rel="stylesheet" media="screen" />
     <link href="//${CDN_PREFIX}/css/app.min.css" rel="stylesheet" media="screen" />
@@ -45,8 +45,8 @@ const html = content => `
 </html>
 `
 
-async function returnPage(content) {
-    return new Response(html(content), {
+async function returnPage(path, content) {
+    return new Response(html(path, content), {
         headers: {
             'content-type': 'text/html;charset=UTF-8',
         },
@@ -83,10 +83,10 @@ async function handleRequest(request) {
         }
 
         // query content
-        const queryKey = nextPath.slice(1)
+        const queryKey = url.pathname.slice(1)
         const content = await NOTES.get(queryKey) || ''
 
-        return returnPage(content)
+        return returnPage(queryKey, content)
     }
 
     // POST modify note
