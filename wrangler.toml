@@ -1,0 +1,13 @@
+name = "cloud-notepad"
+main = "src/index.js"
+compatibility_date = "2022-05-13"
+
+kv_namespaces = [
+  { binding = "NOTES", id = "b3afc649c15247c9962346b3de4730cc", preview_id = "01083e57f68046079a62015c3ea4a145" }
+]
+
+# Run `wrangler publish --env production` when happy
+[env.production]
+kv_namespaces = [
+    { binding = "NOTES", id = "b3afc649c15247c9962346b3de4730cc" }
+]

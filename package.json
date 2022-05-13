@@ -1,0 +1,14 @@
+{
+  "name": "serverless-cloud-notepad",
+  "version": "1.0.0",
+  "author": "s0urce",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "2.0.3"
+  },
+  "private": true,
+  "scripts": {
+    "start": "wrangler dev",
+    "publish": "wrangler publish"
+  }
+}
