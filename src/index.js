@@ -1,7 +1,6 @@
 // use my repo jsdelivr or you can set cdn yourself
 const CDN_PREFIX = 'cdn.jsdelivr.net/gh/s0urcelab/serverless-cloud-notepad@v1.0.0/static'
 
-
 addEventListener('fetch', event => {
     event.respondWith(handleRequest(event.request));
 });
@@ -33,13 +32,12 @@ const html = (path, content) => `
         <div class="layer_1">
             <div class="layer_2">
                 <div class="layer_3">
-                    <textarea name="contents" id="contents" class="contents" spellcheck="true">${content}</textarea>
+                    <textarea name="contents" id="contents" class="contents" spellcheck="true" placeholder="看起来你是第一个到达这里的人！留下点什么吧...">${content}</textarea>
                 </div>
             </div>
         </div>
     </div>
     <div id="loading"></div>
-
     <script src="//${CDN_PREFIX}/js/app.min.js"></script>
 </body>
 </html>
