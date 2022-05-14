@@ -178,3 +178,18 @@ form {
     font: normal 18px Arial, sans-serif;
     color: #aaacb0;
 }
+
+.footer-github-link {
+    position: absolute;
+    bottom: 14px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.footer-github-link > a {
+    outline: none;
+    color: #00000073;
+}
+.footer-github-link > a:hover {
+    color: #000000d9;
+}
