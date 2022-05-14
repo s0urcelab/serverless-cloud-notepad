@@ -22,7 +22,7 @@ const html = (path, content) => `
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${path} — Cloud Notepad</title>
+    <title>${decodeURI(path)} — Cloud Notepad</title>
     <link href="//${CDN_PREFIX}/favicon.ico" rel="shortcut icon" type="image/ico" />
     <link href="//${CDN_PREFIX}/css/normalize.min.css" rel="stylesheet" media="screen" />
     <link href="//${CDN_PREFIX}/css/app.min.css" rel="stylesheet" media="screen" />
