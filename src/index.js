@@ -32,7 +32,7 @@ const html = (path, content) => `
         <div class="layer_1">
             <div class="layer_2">
                 <div class="layer_3">
-                    <textarea name="contents" id="contents" class="contents" spellcheck="true" placeholder="看起来你是第一个到达这里的人！留下点什么吧...">${content}</textarea>
+                    <textarea name="contents" id="contents" class="contents" spellcheck="true" placeholder="There are many like it, but this one is mine...">${content}</textarea>
                 </div>
             </div>
         </div>
