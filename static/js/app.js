@@ -1,5 +1,5 @@
 const errHandle = (err) => {
-    alert(`出错了: ${err}`)
+    alert(`出错了： ${err}`)
 }
 const throttle = (func, delay) => {
     let tid = null
@@ -64,6 +64,10 @@ window.addEventListener('DOMContentLoaded', function () {
     const $shareBtn = document.querySelector('.opt-share > input')
     const $previewPlain = document.querySelector('#preview-plain')
     const $previewMd = document.querySelector('#preview-md')
+    const $shareModal = document.querySelector('.share-modal')
+    const $closeBtn = document.querySelector('.share-modal .close-btn')
+    const $copyBtn = document.querySelector('.share-modal .opt-button')
+    const $shareInput = document.querySelector('.share-modal input')
 
     renderPlain($previewPlain, $textarea.value)
     renderMarkdown($previewMd, $textarea.value)
@@ -168,16 +172,33 @@ window.addEventListener('DOMContentLoaded', function () {
                     }
 
                     if (isShare) {
-                        const shouldCopy = confirm('点击确认将分享链接复制到剪贴板')
-                        if (shouldCopy) {
-                            const origin = window.location.origin
-                            clipboardCopy(`${origin}/share/${res.data}`)
-
-                            alert('复制成功！');
-                        }
+                        const origin = window.location.origin
+                        const url = `${origin}/share/${res.data}`
+                        // show modal
+                        $shareInput.value = url
+                        $shareModal.style.display = 'block'
                     }
                 })
                 .catch(err => errHandle(err))
+        }
+    }
+
+    if ($shareModal) {
+        $closeBtn.onclick = function () {
+            $shareModal.style.display = 'none'
+
+        }
+        $copyBtn.onclick = function () {
+            clipboardCopy($shareInput.value)
+            const originText = $copyBtn.innerHTML
+            const originColor = $copyBtn.style.background
+            $copyBtn.innerHTML = '复制成功！'
+            $copyBtn.style.background = 'orange'
+            window.setTimeout(() => {
+                $shareModal.style.display = 'none'
+                $copyBtn.innerHTML = originText
+                $copyBtn.style.background = originColor
+            }, 1500)
         }
     }
 

@@ -30,13 +30,13 @@ body {
 }
 
 ::-webkit-scrollbar-button:start:decrement {
-    -webkit-border-top-right-radius: 5px;
-    -webkit-border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
 }
 
 ::-webkit-scrollbar-button:end:increment {
-    -webkit-border-bottom-right-radius: 5px;
-    -webkit-border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 textarea:focus {
@@ -272,4 +272,75 @@ textarea:focus {
     color: #bbb;
     font-size: 40px;
     line-height: 40px;
+}
+.modal {
+    display: none;
+}
+.modal-mask {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: #00000073;
+}
+.modal-content {
+    width: 500px;
+    height: 60px;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
+
+    display: flex;
+    padding: 30px;
+    justify-content: center;
+    align-items: center;
+}
+.modal-content .close-btn {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+}
+.modal-content .close-btn:hover {
+    color: #666;
+}
+.modal-body {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.modal-body > .opt-button {
+    flex: 1;
+    margin-left: 10px;
+    font-size: 16px;
+    min-height: 30px;
+}
+.modal-body > input {
+    flex: 3;
+    -webkit-appearance: none;
+    font-size: 16px;
+    outline: none;
+    border: solid 2px #999;
+    border-radius: 6px;
+    line-height: 24px;
+}
+.modal-body > input:hover {
+    border-color: #3a86ffd4;
 }

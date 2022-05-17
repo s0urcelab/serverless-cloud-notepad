@@ -7,7 +7,6 @@ kv_namespaces = [
   { binding = "SHARE", id = "c075feeec9b6414296e6a3df7404e6a8", preview_id = "f89caa54860940709800dc6ed3ff920a" }
 ]
 
-# Run `wrangler publish --env production` when happy
 [env.production]
 kv_namespaces = [
     { binding = "NOTES", id = "b3afc649c15247c9962346b3de4730cc" },
