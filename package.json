@@ -4,7 +4,7 @@
   "author": "s0urce",
   "license": "MIT",
   "devDependencies": {
-    "wrangler": "2.0.3"
+    "wrangler": "2.0.5"
   },
   "private": true,
   "scripts": {
@@ -12,10 +12,10 @@
     "publish": "wrangler publish"
   },
   "dependencies": {
+    "@tsndr/cloudflare-worker-jwt": "^1.1.7",
     "cookie": "^0.5.0",
     "dayjs": "^1.11.2",
     "itty-router": "^2.6.1",
-    "js-cookie": "^3.0.1",
-    "@tsndr/cloudflare-worker-jwt": "^1.1.7"
+    "js-cookie": "^3.0.1"
   }
 }
