@@ -37,7 +37,8 @@ Try it out! [https://note.src.moe/example](https://note.src.moe/example)
 - clone repo & edit `wrangler.toml`:
 ```
 kv_namespaces = [
-  { binding = "NOTES", id = "<your KV id here>" }
+  { binding = "NOTES", id = "<your first KV id here>" },
+  { binding = "SHARE", id = "<your second KV id here>" }
 ]
 ```
 - push code to Cloudflare with wrangler CLI
@@ -49,7 +50,7 @@ $ npm run publish
 
 ## 👀 Roadmap
 
-- [ ] password protection.
-- [ ] support URL/Image.
-- [ ] read only mode.
-- [ ] show last modify date.
+- [x] password protection.
+- [x] support URL/Image (Markdown mode).
+- [x] read only mode (share link).
+- [x] show last modify date.

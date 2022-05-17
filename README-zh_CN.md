@@ -37,7 +37,8 @@
 - 下载仓库代码，编辑 `wrangler.toml`:
 ```
 kv_namespaces = [
-  { binding = "NOTES", id = "<这里填你自己的KV id>" }
+  { binding = "NOTES", id = "<这里填你自己的第1个KV id>" },
+  { binding = "SHARE", id = "<这里填你自己的第2个KV id>" }
 ]
 ```
 - 执行命令推送代码到 Cloudflare
@@ -47,9 +48,9 @@ $ npm run publish
 ```
 - 给你的域名添加一条CNAME解析记录，指向你刚刚创建的Work地址（如果你有自己的域名的话）
 
-## 👀 未来规划
+## 👀 未来规划（完结撒花🎉）
 
-- [ ] 密码保护功能
-- [ ] 支持URL链接和图片
-- [ ] 只读模式
-- [ ] 显示上次修改时间
+- [x] 密码保护功能
+- [x] 支持URL链接和图片（Markdown模式）
+- [x] 只读模式（分享功能）
+- [x] 显示上次修改时间
