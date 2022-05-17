@@ -3,11 +3,13 @@ main = "src/index.js"
 compatibility_date = "2022-05-13"
 
 kv_namespaces = [
-  { binding = "NOTES", id = "b3afc649c15247c9962346b3de4730cc", preview_id = "01083e57f68046079a62015c3ea4a145" }
+  { binding = "NOTES", id = "b3afc649c15247c9962346b3de4730cc", preview_id = "01083e57f68046079a62015c3ea4a145" },
+  { binding = "SHARE", id = "c075feeec9b6414296e6a3df7404e6a8", preview_id = "f89caa54860940709800dc6ed3ff920a" }
 ]
 
 # Run `wrangler publish --env production` when happy
 [env.production]
 kv_namespaces = [
-    { binding = "NOTES", id = "b3afc649c15247c9962346b3de4730cc" }
+    { binding = "NOTES", id = "b3afc649c15247c9962346b3de4730cc" },
+    { binding = "SHARE", id = "c075feeec9b6414296e6a3df7404e6a8" }
 ]
