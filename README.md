@@ -54,3 +54,10 @@ $ npm run publish
 - [x] support URL/Image (Markdown mode).
 - [x] read only mode (share link).
 - [x] show last modify date.
+
+## ☕ Donate
+
+maybe, buy me a coffee?
+
+[www.buymeacoffee.com/s0urce](https://www.buymeacoffee.com/s0urce)    
+[src.moe/donate](https://src.moe/donate)
