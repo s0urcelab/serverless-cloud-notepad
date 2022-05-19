@@ -60,4 +60,4 @@ $ npm run publish
 maybe, buy me a coffee?
 
 [www.buymeacoffee.com/s0urce](https://www.buymeacoffee.com/s0urce)    
-[src.moe/donate](https://src.moe/donate)
+[https://src.moe/donate](https://src.moe/donate)
