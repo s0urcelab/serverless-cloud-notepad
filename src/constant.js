@@ -1,5 +1,5 @@
 // static CDN
-export const CDN_PREFIX = '//cdn.jsdelivr.net/gh/s0urcelab/serverless-cloud-notepad@src.moe/static'
+export const CDN_PREFIX = '//fastly.jsdelivr.net/gh/s0urcelab/serverless-cloud-notepad@src.moe/static'
 
 // server side salt
 export const SALT = 'gshkol3k8bjhgadf'
