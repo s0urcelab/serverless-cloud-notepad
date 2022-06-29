@@ -59,5 +59,6 @@ $ npm run publish
 
 maybe, buy me a coffee?
 
-[www.buymeacoffee.com/s0urce](https://www.buymeacoffee.com/s0urce)    
+<a href="https://www.buymeacoffee.com/s0urce" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+
 [https://src.moe/donate](https://src.moe/donate)
