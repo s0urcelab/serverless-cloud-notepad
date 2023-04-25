@@ -163,11 +163,21 @@ router.post('/:path/setting', async request => {
 
 router.post('/:path', async request => {
     const { path } = request.params
+    const { value, metadata } = await queryNote(path)
+
+    const cookie = Cookies.parse(request.headers.get('Cookie') || '')
+    const valid = await checkAuth(cookie, path)
+
+    if (!metadata.pw || valid) {
+        // OK
+    } else {
+        return returnJSON(10002, 'Password auth failed! Try refreshing this page if you had just set a password.')
+    }
 
     const formData = await request.formData();
     const content = formData.get('t')
 
-    const { metadata } = await queryNote(path)
+    // const { metadata } = await queryNote(path)
 
     try {
         await NOTES.put(path, content, {
