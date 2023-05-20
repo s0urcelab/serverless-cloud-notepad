@@ -4,18 +4,18 @@
   "author": "s0urce",
   "license": "MIT",
   "devDependencies": {
-    "wrangler": "2.0.5"
+    "wrangler": "3.0.0"
   },
   "private": true,
   "scripts": {
     "start": "wrangler dev",
-    "publish": "wrangler publish"
+    "publish": "wrangler deploy"
   },
   "dependencies": {
-    "@tsndr/cloudflare-worker-jwt": "^1.1.7",
+    "@tsndr/cloudflare-worker-jwt": "^2.2.1",
     "cookie": "^0.5.0",
-    "dayjs": "^1.11.2",
-    "itty-router": "^2.6.1",
-    "js-cookie": "^3.0.1"
+    "dayjs": "^1.11.7",
+    "itty-router": "^3.0.12",
+    "js-cookie": "^3.0.5"
   }
 }
