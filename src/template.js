@@ -34,7 +34,7 @@ const MODAL = `
 <div class="modal share-modal">
     <div class="modal-mask"></div>
     <div class="modal-content">
-        <span class="close-btn">🗙</span>
+        <span class="close-btn">x</span>
         <div class="modal-body">
             <input type="text" readonly value="" />
             <button class="opt-button">复制</button>
