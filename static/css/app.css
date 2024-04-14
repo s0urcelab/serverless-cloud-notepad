@@ -72,6 +72,7 @@ textarea:focus {
 .note-container {
     padding: 30px 30px 0 30px;
 }
+
 .stack {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -140,13 +141,16 @@ textarea:focus {
     line-height: 20px;
     color: #3a3b3c;
 }
+
 .stack .layer_1 .layer_2 .layer_3 .contents.hide {
     display: none;
 }
+
 .divide-line {
     margin: 0 10px;
     width: 1px;
 }
+
 .stack .layer_1 .layer_2 .layer_3 .contents.monospace {
     font: normal 12px Monaco, 'Courier New', monospace;
     line-height: 18px;
@@ -163,9 +167,9 @@ textarea:focus {
     padding: 0 30px;
     width: 100%;
     height: 26px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .opt {
@@ -267,15 +271,18 @@ textarea:focus {
     -ms-transform: translateX(16px);
     transform: translateX(16px);
 }
+
 .tips {
     user-select: none;
     color: #bbb;
     font-size: 40px;
     line-height: 40px;
 }
+
 .modal {
     display: none;
 }
+
 .modal-mask {
     position: fixed;
     z-index: 1;
@@ -286,8 +293,9 @@ textarea:focus {
     margin: auto;
     background-color: #00000073;
 }
+
 .modal-content {
-    width: 500px;
+    max-width: 500px;
     height: 60px;
     position: absolute;
     z-index: 2;
@@ -305,6 +313,7 @@ textarea:focus {
     justify-content: center;
     align-items: center;
 }
+
 .modal-content .close-btn {
     cursor: pointer;
     position: absolute;
@@ -317,22 +326,26 @@ textarea:focus {
     font-weight: bold;
     color: #000;
 }
+
 .modal-content .close-btn:hover {
     color: #666;
 }
+
 .modal-body {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.modal-body > .opt-button {
+
+.modal-body>.opt-button {
     flex: 1;
     margin-left: 10px;
     font-size: 16px;
     min-height: 30px;
 }
-.modal-body > input {
+
+.modal-body>input {
     flex: 3;
     -webkit-appearance: none;
     font-size: 16px;
@@ -341,6 +354,7 @@ textarea:focus {
     border-radius: 6px;
     line-height: 24px;
 }
-.modal-body > input:hover {
+
+.modal-body>input:hover {
     border-color: #3a86ffd4;
 }
