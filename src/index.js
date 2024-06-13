@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 import { Router } from 'itty-router'
 import Cookies from 'cookie'
 import jwt from '@tsndr/cloudflare-worker-jwt'
-import { queryNote, MD5, checkAuth, genRandomStr, returnPage, returnJSON, saltPw } from './helper'
+import { queryNote, MD5, checkAuth, genRandomStr, returnPage, returnJSON, saltPw, getI18n } from './helper'
 import { SECRET } from './constant'
 
 // init
@@ -14,33 +14,38 @@ router.get('/', ({ url }) => {
     return Response.redirect(`${url}${newHash}`, 302)
 })
 
-router.get('/share/:md5', async ({ params }) => {
-    const { md5 } = params
+router.get('/share/:md5', async (request) => {
+    const lang = getI18n(request)
+    const { md5 } = request.params
     const path = await SHARE.get(md5)
 
     if (!!path) {
         const { value, metadata } = await queryNote(path)
 
         return returnPage('Share', {
+            lang,
             title: decodeURIComponent(path),
             content: value,
             ext: metadata,
         })
     }
 
-    return returnPage('Page404', { title: '404' })
+    return returnPage('Page404', { lang, title: '404' })
 })
 
-router.get('/:path', async ({ params, headers }) => {
-    const { path } = params
+router.get('/:path', async (request) => {
+    const lang = getI18n(request)
+
+    const { path } = request.params
     const title = decodeURIComponent(path)
 
-    const cookie = Cookies.parse(headers.get('Cookie') || '')
+    const cookie = Cookies.parse(request.headers.get('Cookie') || '')
 
     const { value, metadata } = await queryNote(path)
 
     if (!metadata.pw) {
         return returnPage('Edit', {
+            lang,
             title,
             content: value,
             ext: metadata,
@@ -50,13 +55,14 @@ router.get('/:path', async ({ params, headers }) => {
     const valid = await checkAuth(cookie, path)
     if (valid) {
         return returnPage('Edit', {
+            lang,
             title,
             content: value,
             ext: metadata,
         })
     }
 
-    return returnPage('NeedPasswd', { title })
+    return returnPage('NeedPasswd', { lang, title })
 })
 
 router.post('/:path/auth', async request => {
@@ -195,7 +201,10 @@ router.post('/:path', async request => {
     return returnJSON(10001, 'KV insert fail!')
 })
 
-router.all('*', () => returnPage('Page404', { title: '404' }))
+router.all('*', (request) => {
+    const lang = getI18n(request)
+    returnPage('Page404', { lang, title: '404' })
+})
 
 addEventListener('fetch', event => {
     event.respondWith(router.handle(event.request))

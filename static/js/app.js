@@ -1,6 +1,36 @@
-const errHandle = (err) => {
-    alert(`Error: ${err}`)
+
+const DEFAULT_LANG = 'en'
+const SUPPORTED_LANG = {
+    'en': {
+        err: 'Error',
+        pepw: 'Please enter password.',
+        pwcnbe: 'Password is empty!',
+        enpw: 'Enter a new password(Keeping it empty will remove the current password)',
+        pwss: 'Password set successfully.',
+        pwrs: 'Password removed successfully.',
+        cpys: 'Copied!',
+    },
+    'zh': {
+        err: '出错了',
+        pepw: '请输入密码',
+        pwcnbe: '密码不能为空！',
+        enpw: '输入新密码（留空可清除当前密码）',
+        pwss: '密码设置成功！',
+        pwrs: '密码清除成功！',
+        cpys: '已复制',
+    }
 }
+
+const getI18n = key => {
+    const userLang = (navigator.language || navigator.userLanguage || DEFAULT_LANG).split('-')[0]
+    const targetLang = Object.keys(SUPPORTED_LANG).find(l => l === userLang) || DEFAULT_LANG
+    return SUPPORTED_LANG[targetLang][key]
+}
+
+const errHandle = (err) => {
+    alert(`${getI18n('err')}: ${err}`)
+}
+
 const throttle = (func, delay) => {
     let tid = null
 
@@ -15,11 +45,11 @@ const throttle = (func, delay) => {
 }
 
 const passwdPrompt = () => {
-    const passwd = window.prompt('Please enter password')
+    const passwd = window.prompt(getI18n('pepw'))
     if (passwd == null) return;
 
     if (!passwd.trim()) {
-        alert('password can not be empty!')
+        alert(getI18n('pwcnbe'))
     }
     const path = location.pathname
     window.fetch(`${path}/auth`, {
@@ -103,7 +133,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     if ($pwBtn) {
         $pwBtn.onclick = function () {
-            const passwd = window.prompt('Enter a new password(keep empty will remove current password)')
+            const passwd = window.prompt(getI18n('enpw'))
             if (passwd == null) return;
 
             const path = window.location.pathname
@@ -121,7 +151,7 @@ window.addEventListener('DOMContentLoaded', function () {
                     if (res.err !== 0) {
                         return errHandle(res.msg)
                     }
-                    alert(`Password ${passwd ? 'setting' : 'remove'} success!`)
+                    alert(passwd ? getI18n('pwss') : getI18n('pwrs'))
                 })
                 .catch(err => errHandle(err))
         }
@@ -151,7 +181,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 .catch(err => errHandle(err))
         }
     }
-    
+
     if ($shareBtn) {
         $shareBtn.onclick = function (e) {
             const isShare = e.target.checked
@@ -192,7 +222,7 @@ window.addEventListener('DOMContentLoaded', function () {
             clipboardCopy($shareInput.value)
             const originText = $copyBtn.innerHTML
             const originColor = $copyBtn.style.background
-            $copyBtn.innerHTML = 'Success!'
+            $copyBtn.innerHTML = getI18n('cpys')
             $copyBtn.style.background = 'orange'
             window.setTimeout(() => {
                 $shareModal.style.display = 'none'
