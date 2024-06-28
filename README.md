@@ -1,6 +1,7 @@
 # ☁ Serverless Cloud Notepad
 
 [![cloudflare workers](https://badgen.net/badge/a/Cloudflare%20Workers/orange?icon=https%3A%2F%2Fworkers.cloudflare.com%2Fresources%2Flogo%2Flogo.svg&label=)](https://workers.cloudflare.com/)
+![example workflow](https://github.com/s0urcelab/serverless-cloud-notepad/actions/workflows/deploy.yml/badge.svg)
 [![jsdelivr](https://img.shields.io/badge/jsdelivr-cdn-brightgreen)](https://www.jsdelivr.com/)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/dotzero/pad/blob/master/LICENSE)
 
@@ -8,7 +9,7 @@ English | [简体中文](./README-zh_CN.md)
 
 Build for recording text or sharing between friends.
 
-Powerby Cloudflare Workers, easy to deploy privately.
+Powered by Cloudflare Workers & Github Actions, Easy to deploy privately.
 
 ## ✨ Features
 
@@ -33,20 +34,18 @@ Try it out! [https://note.src.moe/example](https://note.src.moe/example)
 
 ## 📦 Deployment
 
-- sign up your own Worker/KV in [workers.cloudflare.com](https://workers.cloudflare.com/).
-- clone repo & edit `wrangler.toml`:
+- Create your Cloudflare API token in [here](https://dash.cloudflare.com/profile/api-tokens), choose `Cloudflare Workers Template` to complete create.
+- Fork this repository and add 3 Secret in `Settings->Secrets and variables->Actions`:
 ```
-kv_namespaces = [
-  { binding = "NOTES", id = "<your first KV id here>" },
-  { binding = "SHARE", id = "<your second KV id here>" }
-]
+CLOUDFLARE_API_TOKEN # your Cloudflare API token
+
+SCN_SALT # whatever you like(for security reason)
+
+SCN_SECRET # whatever you like(for security reason)
 ```
-- push code to Cloudflare with wrangler CLI
-```
-$ npm i
-$ npm run publish
-```
-- CNAME Worker url to your domain.
+- Go to Actions tab, run `Deploy cloud-notepad` workflow.
+- After a while, you will see the deployment-url in Annotations.
+- CNAME deployment-url to your domain if you like.(optional)
 
 ## 👀 Roadmap
 
