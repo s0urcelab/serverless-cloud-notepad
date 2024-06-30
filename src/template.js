@@ -49,6 +49,7 @@ const HTML = ({ lang, title, content, ext = {}, tips, isEdit, showPwPrompt }) =>
     <title>${title} — Cloud Notepad</title>
     <link href="${CDN_PREFIX}/favicon.ico" rel="shortcut icon" type="image/ico" />
     <link href="${CDN_PREFIX}/css/app.min.css" rel="stylesheet" media="screen" />
+    <script async defer data-website-id="ecbf8429-ce46-440f-ae1f-ff9ebd5764ea" src="//umamirn2.hwb0307.com/umami.js"></script>
 </head>
 <body>
     <div class="note-container">
