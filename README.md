@@ -9,7 +9,7 @@ English | [简体中文](./README-zh_CN.md)
 
 Build for recording text or sharing between friends.
 
-Powered by Cloudflare Workers & Github Actions, Easy to deploy privately.
+Powered by Cloudflare Workers、KV & Github Actions, Easy to deploy privately.
 
 ## ✨ Features
 
@@ -17,7 +17,7 @@ Powered by Cloudflare Workers & Github Actions, Easy to deploy privately.
 - 💾 Auto saving.
 - ❌ No backend/server or database required.
 - ⚡ High available & High performance in worldwide.
-- 📦 Easy to deploy in your own site.
+- 📦 One-click deployment for your own site.
 - 🌍 i18n support for pathname.
 
 ## 🔨 Usage
@@ -28,6 +28,9 @@ Powered by Cloudflare Workers & Github Actions, Easy to deploy privately.
 
 Try it out! [https://note.src.moe/example](https://note.src.moe/example)
 
+> [!NOTE]
+> According to Cloudflare's [free policy](https://developers.cloudflare.com/kv/platform/limits/), KV has a daily limit of 1,000 write/delete operations. It is highly recommended to deploy your own.
+
 ## 💻 Compatibility
 
 - Modern browsers (both PC & Mobile)
@@ -35,8 +38,8 @@ Try it out! [https://note.src.moe/example](https://note.src.moe/example)
 ## 📦 Deployment
 
 - Create your Cloudflare API token in [here](https://dash.cloudflare.com/profile/api-tokens), choose `Cloudflare Workers Template` to complete create.
-- Fork this repository and add 3 Secret in `Settings->Secrets and variables->Actions`:
-```
+- Fork this repository and add 3 Secret in `Settings -> Secrets and variables -> Actions`:
+```bash
 CLOUDFLARE_API_TOKEN # your Cloudflare API token
 
 SCN_SALT # whatever you like(for security reason)
