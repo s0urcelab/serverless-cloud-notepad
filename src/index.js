@@ -9,7 +9,7 @@ import { SECRET } from './constant'
 const router = Router()
 
 router.get('/', ({ url }) => {
-    const newHash = genRandomStr(3)
+    const newHash = genRandomStr(8)
     // redirect to new page
     return Response.redirect(`${url}${newHash}`, 302)
 })
