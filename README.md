@@ -52,10 +52,10 @@ SCN_SECRET # whatever you like(for security reason)
 
 ## 👀 Roadmap
 
-- [x] password protection.
-- [x] support URL/Image (Markdown mode).
-- [x] read only mode (share link).
-- [x] show last modify date.
+- [x] ~~password protection.~~
+- [x] ~~support URL/Image (Markdown mode).~~
+- [x] ~~read only mode (share link).~~
+- [x] ~~show last modify date.~~
 
 ## ☕ Donate
 
