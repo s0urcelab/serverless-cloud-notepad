@@ -1,0 +1,89 @@
+name: Deploy cloud-notepad
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - name: Check if required secrets exist
+        run: |
+          if [ -z "${{ secrets.CLOUDFLARE_API_TOKEN }}" ]; then
+            echo "Error: CLOUDFLARE_API_TOKEN secret is missing!"
+            exit 1
+          fi
+          if [ -z "${{ secrets.SCN_SALT }}" ]; then
+            echo "Error: SCN_SALT secret is missing!"
+            exit 1
+          fi
+          if [ -z "${{ secrets.SCN_SECRET }}" ]; then
+            echo "Error: SCN_SECRET secret is missing!"
+            exit 1
+          fi
+
+      - uses: actions/checkout@v4
+      - name: Check if <NOTES_KV_BINDING_ID> and <SHARE_KV_BINDING_ID> exist
+        id: check_wrangler_toml
+        run: |
+          if grep -q "<NOTES_KV_BINDING_ID>" wrangler.toml; then
+            echo "notes_update_needed=true" >> $GITHUB_OUTPUT
+          else
+            echo "notes_update_needed=false" >> $GITHUB_OUTPUT
+          fi
+          if grep -q "<SHARE_KV_BINDING_ID>" wrangler.toml; then
+            echo "share_update_needed=true" >> $GITHUB_OUTPUT
+          else
+            echo "share_update_needed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create SCN_NOTES KV namespace if needed
+        if: steps.check_wrangler_toml.outputs.notes_update_needed == 'true'
+        id: create_notes_kv
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          command: kv:namespace create "notes"
+
+      - name: Create SCN_SHARE KV namespace if needed
+        if: steps.check_wrangler_toml.outputs.share_update_needed == 'true'
+        id: create_share_kv
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          command: kv:namespace create "share"
+
+      - name: Update wrangler.toml with KV IDs and push changes
+        if: steps.check_wrangler_toml.outputs.notes_update_needed == 'true' || steps.check_wrangler_toml.outputs.share_update_needed == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ "${{ steps.check_wrangler_toml.outputs.notes_update_needed }}" == "true" ]; then
+            notes_kv_id=$(echo '${{ steps.create_notes_kv.outputs.command-output }}' | sed -n 's/.*id = "\([^"]*\)".*/\1/p')
+            sed -i "s/<NOTES_KV_BINDING_ID>/$notes_kv_id/g" wrangler.toml
+          fi
+          if [ "${{ steps.check_wrangler_toml.outputs.share_update_needed }}" == "true" ]; then
+            share_kv_id=$(echo '${{ steps.create_share_kv.outputs.command-output }}' | sed -n 's/.*id = "\([^"]*\)".*/\1/p')
+            sed -i "s/<SHARE_KV_BINDING_ID>/$share_kv_id/g" wrangler.toml
+          fi
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git commit wrangler.toml -m "Updated KV binding IDs in wrangler.toml [skip ci]"
+          git push origin HEAD
+
+      - name: Deploy to Cloudflare
+        id: deploy_to_cf
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          secrets: |
+            SCN_SALT
+            SCN_SECRET
+        env:
+          SCN_SALT: ${{ secrets.SCN_SALT }}
+          SCN_SECRET: ${{ secrets.SCN_SECRET }}
+      - name: Output deployment URL
+        env:
+          DEPLOYMENT_URL: ${{ steps.deploy_to_cf.outputs.deployment-url }}
+        run: echo "::notice::🎉 Deployment successful! ${DEPLOYMENT_URL}"
